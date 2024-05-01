@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/user_dashboard_style.css') }}">
+</head>
+<body>
+    <h1>Добрый день, {{ username }}!</h1>
+    <ul>
+        <li><a href="#" onclick="openProfileModal()">Мой профиль</a></li>
+        <li><a href="#" id="share-gb-button">Поделиться ГБ</a></li>
+        <li><a href="#" id="share-minutes-button">Поделиться минутами</a></li>
+        <li><a href="#" id="recharge-balance-button">Пополнить баланс</a></li>
+        <li><a href="#" onclick="openTariffList()">Список тарифов</a></li>
+        <li><a href="#" onclick="openChangeTariffModal()">Изменить тариф</a></li>
+        <li><a href="#" id="buy-gb-button">Купить ГБ</a></li>
+        <li><a href="#" id="buy-minutes-button">Купить минуты</a></li>
+        <li><a href="#" id="pay-tariff-button">Оплатить тариф</a></li>
+    </ul>
+    <form action="/" method="GET">
+        <button type="submit" class="logout-button">Выйти с аккаунта</button>
+    </form>
+
+    <div id="profile-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeProfileModal()">&times;</span>
+            <div id="profile-modal-content">
+            </div>
+        </div>
+    </div>
+
+    <div id="share-gb-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-gb-modal-button">&times;</span>
+            <h3>Поделиться ГБ</h3>
+            <form id="share-gb-form">
+                <label for="phone_number">Номер получателя:</label>
+                <input type="text" id="phone_number" name="phone_number" required><br>
+                <label for="value">Сколько GB отправить:</label>
+                <input type="number" id="value" name="value" min="1" step="1" required><br>
+                <button type="submit">Поделиться</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="share-minutes-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-minutes-modal-button">&times;</span>
+            <h3>Поделиться минутами</h3>
+            <form id="share-minutes-form">
+                <label for="phone_number">Номер получателя:</label>
+                <input type="text" id="phone_number_min" name="phone_number" required><br>
+                <label for="value">Сколько минут отправить:</label>
+                <input type="number" id="value_min" name="value" min="1" step="1" required><br>
+                <button type="submit">Поделиться</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="recharge-balance-modal" class="modal">
+    <div class="modal-content">
+        <span class="close" id="close-recharge-balance-button">&times;</span>
+        <h3>Пополнить баланс</h3>
+        <form id="recharge-balance-form">
+            <label for="amount">Сумма в рублях:</label>
+            <input type="number" id="value_recharge" name="value" min="1" step="1" required><br>
+            <button type="submit">Пополнить</button>
+        </form>
+    </div>
+</div>
+
+    <div id="buy-gb-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-buy-gb-modal-button">&times;</span>
+            <h3>Купить ГБ</h3>
+            <form id="buy-gb-form">
+                <label for="value">Сколько GB купить:</label>
+                <input type="number" id="gb-amount" name="value" min="1" step="1" required><br>
+                <button type="submit">Купить</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="buy-minutes-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="close-buy-minutes-modal-button">&times;</span>
+            <h3>Купить минуты</h3>
+            <form id="buy-minutes-form">
+                <label for="value">Сколько минут купить:</label>
+                <input type="number" id="minutes-amount" name="value" min="1" step="1" required><br>
+                <button type="submit">Купить</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="tariff-list-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeTariffListModal()">&times;</span>
+            <h3>Список Тарифов</h3>
+            <table id="tariff-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>GB</th>
+                        <th>Минуты</th>
+                        <th>Цена за 1 GB</th>
+                        <th>Цена за 1 минуту</th>
+                        <th>Общий прайс</th>
+                    </tr>
+                </thead>
+                <tbody id="tariff-list"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="change-tariff-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeChangeTariffModal()">&times;</span>
+            <h3>Изменить тариф</h3>
+            <form id="change-tariff-form">
+                <label for="tariff-id">Номер тарифа:</label>
+                <input type="number" id="tariff-id" name="id" min="1" step="1" required><br>
+                <!-- Добавьте другие поля для изменения тарифа, если необходимо -->
+                <button type="submit">Изменить</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/static/scripts/user_my_profile_script.js"></script>
+    <script src="/static/scripts/shareGBModal.js"></script>
+    <script src="/static/scripts/shareMinutesModal.js"></script>
+    <script src="/static/scripts/rechargeBalanceModal.js"></script>
+    <script src="/static/scripts/buyGBModal.js"></script>
+    <script src="/static/scripts/buyMinutesModal.js"></script>
+    <script src="/static/scripts/tariff_list_modal_script.js"></script>
+    <script src="/static/scripts/user_pay_tariff.js"></script>
+    <script src="/static/scripts/user_change_tariff.js"></script>
+
+
+
+</body>
+</html>

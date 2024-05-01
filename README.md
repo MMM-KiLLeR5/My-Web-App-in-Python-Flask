@@ -1,93 +1,77 @@
-# tp_project_VRM24_252
+# Онлайн-приложение "VRM"
+## Рахимов Ворис, Камолиддинзода Мухаммадхуджа и Дадабаев Рауфджон Б05-252
+Добро пожаловать в VRM, данное приложение представляет из себя онлайн-приложение, разрабатываемое на языке Python.
+Это приложение поможет вам легко управлять вашим аккаунтом VRM, проверять баланс, остаток гигабайт и минут, а также обмениваться гигабайтами и минутами с другими пользователями.
+## Возможности
+- **Проверка и пополнение баланса**: В приложении вы можете быстро узнать текущий остаток на вашем счету.
+- **Проверка остатка минут и гигабайт**: Узнайте, сколько осталось у вас интернет-трафика и минут разговора.
+- **Покупка минут и гигабайтов**: Докупайте необходимое вам количество минут и гигабайт.
+- **Обмен минутами и гигабайтами**: Обменивайтесь остатками гигабайт и минут с другими пользователями VRM прямо из приложения.
+- **Проверка и изменение тарифа**: Сравнивайте и выберите наиболее подходящий для себя тариф.
+
+## Архитектура нашего проекта:
+
+![](UML-diagram-latest.png)
+
+## Запуск проект
+### Необходимая версия питона 
+#### version - 3.12
+### Создание виртуального окружение
+    pip install virtualenv
+    
+    virtualenv myenv
+    
+    source myenv/bin/activate
+     
+    pip install -r requirements.txt
+
+### Запуск
+    cd src
+    python manage.py # запуск бэкэнд сервера
+    cd ..
+    cd frontend
+    python app.py
+    
+
+### Код доступа для админов
+#### secret_key = {напишем тебе в телеге}
+
+### API
+#### Я сделал документацию для api, и напишите я скину его вам в лс
+
+# ПРЕДУПРЕЖДЕНИЕ
+- **Сначало создайте аккаунт для админа и создайте один тарифф, без него вы не сможете зарегестрироваться как пользователь(так как вы будете запускать на локальной базе данных, наши созданные тариффы вам будут не доступны)!!!**
+
+## Описание некоторых методов нашего API.
+
+- **По этому пути мы регистрируем нашего Админа. Мы должны получить данные представленные в скриншоте**![](screenshots/admin_register.png)
 
 
+- **Здесь мы вводим логин и пароль, в наш фронт получает токен для запросов**![](screenshots/admin_login.png)
 
-## Getting started
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+- **Этот метод позволяет изменять существующий тариф. Для этого мы должны получить данные представленные на снимке. tariff_id это номер тариффа который мы хотим изменит**![](screenshots/admin_edit_tariff.png)
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
 
-## Add your files
+- **Благодаря этому методу, мы получаем список тарифов, мы получаем его виде списка словарей**![![]](screenshots/admin_get_list_of_tariff.png)
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+#### Регистратсия в вход для юзера такие же, поэтому рассмотрим другие методы.
 
-```
-cd existing_repo
-git remote add origin https://gitlab.akhcheck.ru/MMM-KiLLeR5/tp_project_vrm24_252.git
-git branch -M main
-git push -uf origin main
-```
+- **Метод благодаря которому мы покупаем гб. `value` это сколько гб мы хотим купить**![](screenshots/user_buy_gb.png)
 
-## Integrate with your tools
 
-- [ ] [Set up project integrations](https://gitlab.akhcheck.ru/MMM-KiLLeR5/tp_project_vrm24_252/-/settings/integrations)
+- **Метод для пополнение счёта. `value` это сколько мы хотим положить на счёт**![](screenshots/user_deposit.png)
 
-## Collaborate with your team
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+- **Метод чтобы оплатить тариф. Как видите он ничего не принимает, т.к. мы проверяем его баланс и смотрим хватить ли у него денег для оплаты тарифа**![](screenshots/user_pay_tariff.png)
 
-## Test and Deploy
 
-Use the built-in continuous integration in GitLab.
+- **Метод для деление гб с другом. `phone_number` - номер нашего друга, `value` - это сколько мы хотим скинуть**![](screenshots/user_share_gb.png)
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
 
-***
+- **Метод для получение информации о балансе, и нашего тарифа. Когда мы нажимаем на кнопку мой профиль, нам открывается окошка, в котором мы видим сколько у нас на балансе и сколько у нас гб и минут осталось и информацию про наш тариф. Эту информацию мы получаем благодаря этому методу**![](screenshots/users_data.png)
 
-# Editing this README
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+#### Остальные методы реализованы примерно так же. Для полного ознакамление могу запустить наш сервер и скинуть ссылку на документацию с хорошим графическим дизайным.
 
-## Suggestions for a good README
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.

@@ -1,0 +1,148 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    font-size: 36px;
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+a,
+button[type="submit"] {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+    font-size: 18px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+a:hover,
+button[type="submit"]:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+form button.logout-button {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+form button.logout-button:hover {
+    background-color: #c82333;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s ease;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.5s ease;
+    max-width: 400px; /* Ограничиваем ширину модального окна */
+    text-align: center; /* Центрируем содержимое по центру */
+    position: relative; /* Добавляем позиционирование для корректного размещения кнопки закрытия */
+}
+
+.close {
+    color: #aaaaaa;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* Добавленные стили для таблицы тарифов у пользователя */
+
+#tariff-list-modal .modal-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#tariff-list-modal .modal-content th,
+#tariff-list-modal .modal-content td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff; /* Указываем белый фон для ячеек таблицы */
+    color: #333; /* Цвет текста */
+}
+
+#tariff-list-modal .modal-content th {
+    background-color: #007bff; /* Синий цвет фона для заголовков */
+    color: #fff; /* Белый цвет текста */
+}
+
+#tariff-list-modal .modal-content th:first-child,
+#tariff-list-modal .modal-content td:first-child {
+    border-top-left-radius: 10px;
+}
+
+#tariff-list-modal .modal-content th:last-child,
+#tariff-list-modal .modal-content td:last-child {
+    border-top-right-radius: 10px;
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/user_register_style.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Регистрация</h1>
+    <form id="userRegistrationForm" action="/user/register" method="POST">
+        <label for="first_name">Имя:</label>
+        <input type="text" id="first_name" name="first_name" required><br>
+        <label for="last_name">Фамилия:</label>
+        <input type="text" id="last_name" name="last_name" required><br>
+        <label for="birth_date">Дата Рождения:</label>
+        <input type="date" id="birth_date" name="birth_date" required><br>
+        <label for="passport_id">Номер паспорта:</label>
+        <input type="text" id="passport_id" name="passport_id" required><br>
+        <label for="sex">Пол:</label>
+        <select id="sex" name="sex" required>
+            <option value="male">Мужчина</option>
+            <option value="female">Женщина</option>
+        </select><br>
+        <label for="phone_number">Номер телефона:</label>
+        <input type="text" id="phone_number" name="phone_number" required><br>
+        <label for="username">Логин:</label>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" required><br>
+        <label for="tariff_id">Выберите тариф:</label>
+        <select id="tariff_id" name="tariff_id" required></select><br>
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+    <!-- Кнопка "Назад" -->
+    <button class="back-button" onclick="goBack()">
+        <i class="fas fa-arrow-left"></i> Назад
+    </button>
+</div>
+<script src="/static/scripts/load_first_3_tariffs_script.js"></script>
+<script src="/static/scripts/user_register_script.js"></script>
+
+</body>
+</html>
