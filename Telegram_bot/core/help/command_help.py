@@ -1,14 +1,7 @@
 from aiogram.types import ReplyKeyboardRemove
+from tp_project_vrm24_252.Telegram_bot.massage_config.messages import HelpMessage
 
 
 async def get_help(message, state):
     await state.clear()
-    help_text = (
-        "Список доступных команд:\n"
-        "/start - Начать взаимодействие с ботом\n"
-        "/help - Показать это сообщение со списком команд\n"
-        "/info - Ваш профиль\n"
-        "/support - отправить запрос в службу поддержки."
-    )
-
-    await message.answer(help_text, reply_markup=ReplyKeyboardRemove())
+    await message.answer(HelpMessage.HELP_TEXT, reply_markup=ReplyKeyboardRemove())

@@ -1,5 +1,6 @@
 import sqlite3
 from aiogram import types
+from tp_project_vrm24_252.Telegram_bot.massage_config.messages import ContactMessage
 
 
 async def add_contact_to_database(message, contact: types.Contact):
@@ -16,7 +17,7 @@ async def add_contact_to_database(message, contact: types.Contact):
 
         connection.commit()
     except sqlite3.IntegrityError:
-        await message.answer(f"Ой! я же тебя знаю, привет {message.from_user.first_name}",
+        await message.answer(f"Ой! я же тебя знаю, привет {message.from_user.first_name}!",
                              reply_markup=types.ReplyKeyboardRemove())
         is_ok = False
     finally:
@@ -26,12 +27,11 @@ async def add_contact_to_database(message, contact: types.Contact):
 
 async def get_contact(message: types.Message, bot):
     contact = message.contact
-    print(contact.phone_number)
 
     if contact.user_id == message.from_user.id:
         is_ok = await add_contact_to_database(message, contact)
-        print(is_ok)
         if is_ok:
-            await message.answer("Спасибо, ваш контакт получен!", reply_markup=types.ReplyKeyboardRemove())
+            await message.answer(ContactMessage.CONTACT_RECEIVED_MESSAGE,
+                                 reply_markup=types.ReplyKeyboardRemove())
     else:
-        await message.answer("Пожалуйста, отправьте ваш контакт, чтобы мы могли связаться с вами.")
+        await message.answer(ContactMessage.PLEASE_SEND_CONTACT_MESSAGE)
