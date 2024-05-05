@@ -16,7 +16,8 @@ async def add_contact_to_database(message, contact: types.Contact):
 
         connection.commit()
     except sqlite3.IntegrityError:
-        await message.answer(f"Ой! я же тебя знаю, привет {message.from_user.first_name}")
+        await message.answer(f"Ой! я же тебя знаю, привет {message.from_user.first_name}",
+                             reply_markup=types.ReplyKeyboardRemove())
         is_ok = False
     finally:
         connection.close()
