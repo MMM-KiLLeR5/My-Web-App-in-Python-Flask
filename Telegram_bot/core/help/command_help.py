@@ -1,4 +1,7 @@
-async def get_help(message, bot):
+from aiogram.types import ReplyKeyboardRemove
+
+
+async def get_help(message):
     help_text = (
         "Список доступных команд:\n"
         "/start - Начать взаимодействие с ботом\n"
@@ -6,4 +9,5 @@ async def get_help(message, bot):
         "/info - Ваш профиль\n"
         "/support - отправить запрос в службу поддержки."
     )
-    await message.answer(help_text, reply_markup=None)
+
+    await message.answer(help_text, reply_markup=ReplyKeyboardRemove())
