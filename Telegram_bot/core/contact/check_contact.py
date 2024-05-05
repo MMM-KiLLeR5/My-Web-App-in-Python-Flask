@@ -2,7 +2,6 @@ import sqlite3
 from aiogram import types
 
 
-# Функция для добавления контакта в базу данных SQLite
 async def add_contact_to_database(message, contact: types.Contact):
     is_ok = True
     try:

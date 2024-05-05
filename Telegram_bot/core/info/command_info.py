@@ -1,7 +1,8 @@
 import sqlite3
 
 
-async def get_user_info(message):
+async def get_user_info(message, state):
+    await state.clear()
     try:
         connection = sqlite3.connect('contacts.db')
         cursor = connection.cursor()
@@ -14,5 +15,7 @@ async def get_user_info(message):
             await message.answer(phone_number)
         else:
             await message.answer("Поделитесь вашим контактом с ботом")
+    except sqlite3.OperationalError:
+        await message.answer("Я о тебе ничего не знаю:(")
     finally:
         connection.close()

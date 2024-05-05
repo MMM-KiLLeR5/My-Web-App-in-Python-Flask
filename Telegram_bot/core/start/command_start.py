@@ -1,10 +1,10 @@
 import asyncio
-
 from ..keyboard.reply import reply_keyboard
 from ..utils.commands import set_commands
 
 
-async def get_start(message, bot):
+async def get_start(message, bot, state):
+    await state.clear()
     await set_commands(bot)
     await message.answer(f'<i>Мы ради видеть вас в чате!</i>', parse_mode='HTML')
     await asyncio.sleep(0.7)

@@ -1,7 +1,8 @@
 from aiogram.types import ReplyKeyboardRemove
 
 
-async def get_help(message):
+async def get_help(message, state):
+    await state.clear()
     help_text = (
         "Список доступных команд:\n"
         "/start - Начать взаимодействие с ботом\n"

@@ -14,18 +14,21 @@ class SupportStates(StatesGroup):
 
 @router.message(Command("support"))
 async def send_support_request(message, bot: Bot, state: FSMContext):
-    await state.set_state(SupportStates.support_message)
+    await state.set_state(state=SupportStates.support_message)
     await message.answer("Добрый день! Напишите ваш вопрос или описание проблемы одним сообщением.")
 
 
-@router.message(SupportStates.support_message)
+@router.message()
 async def send_message_to_admins(message, bot, state: FSMContext):
-    await state.update_data(text_for_admin=message.text)
-    admins_chat_id = -1002057587938
-    support_text = f"Пользователь с ID {message.from_user.id} запрашивает поддержку:\n\n{message.text}"
-    await bot.send_message(admins_chat_id, support_text)
-    await state.set_state(None)  # Завершаем состояние
-    await message.answer("Ваш запрос отправлен администраторам. Ожидайте ответа.")
+    if await state.get_state() == SupportStates.support_message.state:
+        await state.update_data(text_for_admin=message.text)
+        admins_chat_id = -1002057587938
+        support_text = f"Пользователь с ID {message.from_user.id} запрашивает поддержку:\n\n{message.text}"
+        await bot.send_message(admins_chat_id, support_text)
+        await state.clear()
+        await message.answer("Ваш запрос отправлен администраторам. Ожидайте ответа.")
+    else:
+        await message.answer("Вы не запросили поддержку. Воспользуйтесь командой /support.")
 
 
 async def forward_admin_response_to_user(message: Message, bot: Bot, state: FSMContext):
