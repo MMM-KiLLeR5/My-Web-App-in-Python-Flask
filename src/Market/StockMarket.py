@@ -25,9 +25,9 @@ class StockMarket(Base):
 
     def buy_gb(self):
         self.gb = 0
-        self.user.balance += self.cost
+        self.user.set_balance(self.user.get_balance + self.cost)
 
     def buy_min(self):
-        self.min = self = 0
-        self.user.balance += self.cost
+        self.min = 0
+        self.user.set_balance(self.user.get_balance + self.cost)
 

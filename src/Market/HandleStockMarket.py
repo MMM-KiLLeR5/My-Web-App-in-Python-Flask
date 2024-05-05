@@ -1,5 +1,7 @@
 from src.Market.StockMarket import StockMarket
+from src.User.UserAccount import UserAccount
 from src.Tools.DataBase import database
+
 
 class Handler:
     @staticmethod
@@ -13,13 +15,17 @@ class Handler:
         return market
 
     @staticmethod
-    def buy_gb(id):
+    def buy_gb(username, id):
         products = database.get_object(StockMarket, StockMarket.id == id)
-        products.buy_gb
+        cost = products.cost
+        user = database.get_object(UserAccount, (UserAccount.get_username(UserAccount) == username, True))
+        user.set_balance(user.get_balance() - cost)
+        products.buy_gb()
 
     @staticmethod
-    def buy_minutes(id):
+    def buy_minutes(username, id):
         products = database.get_object(StockMarket, StockMarket.id == id)
-        products.buy_min
-
-
+        cost = products.cost
+        user = database.get_object(UserAccount, (UserAccount.get_username(UserAccount) == username, True))
+        user.set_balance(user.get_balance() - cost)
+        products.buy_min()

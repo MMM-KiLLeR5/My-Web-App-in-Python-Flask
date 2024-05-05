@@ -22,7 +22,7 @@ class HandleUser(UserAccount):
         return HandleUser.get_token(user)
 
     @staticmethod
-    def show_user_details(username, phone_number = ''):
+    def show_user_details(username, phone_number=''):
         if (username == '' and phone_number == ''):
             raise AttributeError('Does not give proper argument')
         if phone_number == '':
@@ -109,6 +109,14 @@ class HandleUser(UserAccount):
         return True
 
     @staticmethod
+    def is_user(methods, attribute):
+        getter = {'username': UserAccount.get_username,
+                  'passport_id': UserAccount.get_passport_id,
+                  'phone_number': UserAccount.get_phone_number
+                  }
+        return database.find(UserAccount, (getter[methods](UserAccount) == attribute, True))
+
+    @staticmethod
     def __handle_buy_traffic(username, value, buy_func_key):
         user = database.get_object(UserAccount, (UserAccount.get_username(UserAccount) == username, True))
         buy_func = {
@@ -119,11 +127,3 @@ class HandleUser(UserAccount):
         if res:
             database.insert(user)
         return res
-
-    @staticmethod
-    def is_user(methods, attribute):
-        getter = {'username': UserAccount.get_username,
-                  'passport_id': UserAccount.get_passport_id,
-                  'phone_number': UserAccount.get_phone_number
-                  }
-        return database.find(UserAccount, (getter[methods](UserAccount) == attribute, True))
