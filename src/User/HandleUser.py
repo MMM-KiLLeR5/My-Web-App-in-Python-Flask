@@ -22,8 +22,13 @@ class HandleUser(UserAccount):
         return HandleUser.get_token(user)
 
     @staticmethod
-    def show_user_details(username):
-        user = database.get_object(UserAccount, (UserAccount.get_username(UserAccount) == username, True))
+    def show_user_details(username, phone_number = ''):
+        if (username == '' and phone_number == ''):
+            raise AttributeError('Does not give proper argument')
+        if phone_number == '':
+            user = database.get_object(UserAccount, (UserAccount.get_username(UserAccount) == username, True))
+        else:
+            user = database.get_object(UserAccount, (UserAccount.get_phone_number(UserAccount) == phone_number, True))
         data = {}
         data['user_minutes'] = user.get_minutes()
         data['balance'] = user.get_balance()
@@ -92,15 +97,6 @@ class HandleUser(UserAccount):
         if res:
             database.insert(user)
         return res
-
-    @staticmethod
-    def display_tariffs(tariffs):
-        print(UserConstants.LIST_SERVICES)
-        for i, elem in enumerate(tariffs):
-            print(
-                f"{i + 1}: {elem.get_gb()}ГБ. | {elem.get_minutes()}мин. |"
-                f" {elem.get_cost_one_gb()}руб/гб. "
-                f"| {elem.get_cost_one_minute()}руб/гб. | {elem.get_price()}руб.")
 
     @staticmethod
     def __share_with_friend(share_function, phone_number, value):

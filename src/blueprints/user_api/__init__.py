@@ -114,3 +114,9 @@ def change_tariff(username, tariff_id):
     if res:
         return {"error": "Not such tariff"}, 406
     return {'message': 'Successed'}, 200
+
+@user.route('/data_of_users/{string:phone_number}', methods=['POST'])
+@marshal_with(DataSchema)
+def get_data_by_phone_number(phone_number):
+    my_user = HandleUser.show_user_details('', phone_number)
+    return my_user

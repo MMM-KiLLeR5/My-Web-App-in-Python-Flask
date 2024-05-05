@@ -1,5 +1,5 @@
 from src.User.UserAccount import UserAccount
-from src.Admin.AdminAccount import AdminAccount, Tariff
+from src.Admin.AdminAccount import AdminAccount
 from src.Tools.DataBase import database
 from src.Tools.MyHashFunc import HashFunction
 
