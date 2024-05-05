@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from src.Admin.AdminAccount import AdminAccount, Tariff
-from src.Market.StockMarket import StockMarket
 from src.Tools.DataBase import database
 from flask_jwt_extended import create_access_token
 from datetime import timedelta
