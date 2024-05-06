@@ -15,12 +15,17 @@ class StockMarket(Base):
 
 
     def __init__(self, user, cost, gb=0, min=0):
-        if (gb > user.get_gb()):
-            raise ValueError('GB cannot be greater than user.get_gb()')
-        if (min > user.get_minutes()):
-            raise ValueError('MIN cannot be greater than user.get_min()')
+        if gb == 0 and min > user.get_minutes():
+            raise ValueError('MIN must be greater than or equal to')
+        if min == 0 and gb > user.get_gb():
+            raise ValueError('GB must be greater than or equal to')
 
         self.cost = cost
+        self.gb = gb
+        self.min = min
+        self.user = user
+        self.user.set_minutes(user.get_minutes() - min)
+        self.user.set_gb(user.get_gb() - gb)
 
 
     def buy_gb(self):

@@ -29,6 +29,8 @@ class HandleUser(UserAccount):
             user = database.get_object(UserAccount, (UserAccount.get_username(UserAccount) == username, True))
         else:
             user = database.get_object(UserAccount, (UserAccount.get_phone_number(UserAccount) == phone_number, True))
+        if user is None:
+            return None
         data = {}
         data['user_minutes'] = user.get_minutes()
         data['balance'] = user.get_balance()

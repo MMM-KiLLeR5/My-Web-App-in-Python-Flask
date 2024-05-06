@@ -6,7 +6,7 @@ from src.Constants import Config
 
 class ControlDataBase:
     def __init__(self, db_url):
-        self.__engine = create_engine(db_url, echo=True)
+        self.__engine = create_engine(db_url, echo=False)
         self.__session = None
 
     def create_tables(self):
@@ -23,7 +23,7 @@ class ControlDataBase:
         return self.__session.query(model)
 
     def query_with_options(self, model, expressions, column_to_exclude):
-        return self.__session.query(model).options(defer(getattr(model, column_to_exclude))).filter(
+        return self.__session.query(model).options(defer(column_to_exclude)).filter(
             expressions).all()
 
     def find(self, model, expressions):
