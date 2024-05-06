@@ -146,3 +146,51 @@ form button.logout-button:hover {
 #tariff-list-modal .modal-content td:last-child {
     border-top-right-radius: 10px;
 }
+
+/* Добавленные стили для кнопки Купить */
+.buy-button {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Добавлен эффект при наведении */
+    font-size: 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    border: none;
+}
+
+.buy-button:hover {
+    background-color: #007bff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Добавлен тень при наведении */
+}
+
+.buy-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
+    font-size: 16px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+
+.buy-button:hover {
+    background-color: #007bff;
+    box-shadow: 0 4px 6px rgb(255, 255, 255);
+}
+
+#exchange-gb-modal .modal-content th {
+    background-color: #007bff; /* Синий цвет фона для заголовков */
+    color: #fff; /* Белый цвет текста */
+}
+
+#exchange-min-modal .modal-content th {
+    background-color: #007bff; /* Синий цвет фона для заголовков */
+    color: #fff; /* Белый цвет текста */
+}
