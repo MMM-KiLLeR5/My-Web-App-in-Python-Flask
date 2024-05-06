@@ -1,4 +1,4 @@
-from src.User.UserAccount import UserAccount, Tariff
+from src.User.UserAccount import UserAccount
 from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from src.BaseUser.BaseUser import Base

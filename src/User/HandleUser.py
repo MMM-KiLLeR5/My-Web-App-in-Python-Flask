@@ -1,5 +1,5 @@
 from src.User.UserAccount import UserAccount, Tariff
-from src.Authorization.Authorization import database
+from src.Tools.DataBase import database
 from flask_jwt_extended import create_access_token
 from datetime import timedelta
 
