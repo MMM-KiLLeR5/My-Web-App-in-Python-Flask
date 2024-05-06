@@ -30,6 +30,7 @@ class ContactMessage:
 class InfoMessage:
     CONTACT_MISSING_MESSAGE = "Поделитесь вашим контактом с ботом"
     DATABASE_MISSING_MESSAGE = "Я о тебе ничего не знаю:("
+    MESSAGE_USER_NOT_FOUND = "Вас нет в списке наших клиентов:( Пройдите регистрацию на сайте, пожалуйста."
 
 
 class HelpMessage:
