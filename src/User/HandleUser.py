@@ -1,5 +1,5 @@
 from src.User.UserAccount import UserAccount, Tariff
-from src.Authorization.Authorization import database
+from src.Tools.DataBase import database
 from flask_jwt_extended import create_access_token
 from datetime import timedelta
 
@@ -22,8 +22,15 @@ class HandleUser(UserAccount):
         return HandleUser.get_token(user)
 
     @staticmethod
-    def show_user_details(username):
-        user = database.get_object(UserAccount, (UserAccount.get_username(UserAccount) == username, True))
+    def show_user_details(username, phone_number=''):
+        if (username == '' and phone_number == ''):
+            raise AttributeError('Does not give proper argument')
+        if phone_number == '':
+            user = database.get_object(UserAccount, (UserAccount.get_username(UserAccount) == username, True))
+        else:
+            user = database.get_object(UserAccount, (UserAccount.get_phone_number(UserAccount) == phone_number, True))
+        if user is None:
+            return None
         data = {}
         data['user_minutes'] = user.get_minutes()
         data['balance'] = user.get_balance()
@@ -94,15 +101,6 @@ class HandleUser(UserAccount):
         return res
 
     @staticmethod
-    def display_tariffs(tariffs):
-        print(UserConstants.LIST_SERVICES)
-        for i, elem in enumerate(tariffs):
-            print(
-                f"{i + 1}: {elem.get_gb()}ГБ. | {elem.get_minutes()}мин. |"
-                f" {elem.get_cost_one_gb()}руб/гб. "
-                f"| {elem.get_cost_one_minute()}руб/гб. | {elem.get_price()}руб.")
-
-    @staticmethod
     def __share_with_friend(share_function, phone_number, value):
         owner_of_number = database.get_object(UserAccount, (
             UserAccount.get_phone_number(UserAccount) == phone_number, True))
@@ -111,6 +109,14 @@ class HandleUser(UserAccount):
         share_function(owner_of_number, value)
         database.insert(owner_of_number)
         return True
+
+    @staticmethod
+    def is_user(methods, attribute):
+        getter = {'username': UserAccount.get_username,
+                  'passport_id': UserAccount.get_passport_id,
+                  'phone_number': UserAccount.get_phone_number
+                  }
+        return database.find(UserAccount, (getter[methods](UserAccount) == attribute, True))
 
     @staticmethod
     def __handle_buy_traffic(username, value, buy_func_key):
@@ -123,11 +129,3 @@ class HandleUser(UserAccount):
         if res:
             database.insert(user)
         return res
-
-    @staticmethod
-    def is_user(methods, attribute):
-        getter = {'username': UserAccount.get_username,
-                  'passport_id': UserAccount.get_passport_id,
-                  'phone_number': UserAccount.get_phone_number
-                  }
-        return database.find(UserAccount, (getter[methods](UserAccount) == attribute, True))
