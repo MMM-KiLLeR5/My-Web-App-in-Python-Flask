@@ -14,3 +14,4 @@ docs_register(app, docs, stock_market_api, '/market')
 
 if __name__ == "__main__":
     app.run(debug=True, host=Config.KNOWN_HOST, port=Config.PORT)
+

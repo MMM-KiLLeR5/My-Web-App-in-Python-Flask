@@ -19,6 +19,7 @@ class Handler:
     def get_minutes_market():
         market = sorted(database.query_with_options(StockMarket, (StockMarket.min > 0), StockMarket.gb),
                         key=lambda item: item.min / item.cost, reverse=True)
+        Handler.key_for_min = []
         for item in market:
             Handler.key_for_min.append(item.id)
         return market
@@ -27,29 +28,41 @@ class Handler:
     def get_gb_market():
         market = sorted(database.query_with_options(StockMarket, (StockMarket.gb > 0), StockMarket.gb),
                         key=lambda item: (Handler, item.gb / item.cost), reverse=True)
+        Handler.key_for_gb = []
         for item in market:
-            Handler.key_for_min.append(item.id)
+            Handler.key_for_gb.append(item.id)
         return market
 
     @staticmethod
     def buy_gb(username, id):
-        products = Handler.__take_usernames_money(username, Handler.key_for_gb[id])
-        Handler.key_for_gb.pop(id)
+        products = Handler.__take_usernames_money(username, Handler.key_for_gb[id - 1])
+        if products is None:
+            return True
+        user = database.get_object(UserAccount, (UserAccount.get_username(UserAccount) == username, True))
+        user.set_gb(user.get_gb() + products.gb)
         products.buy_gb()
-        database.delete(StockMarket, (StockMarket.id == Handler.key_for_gb[id], True))
+        database.delete(StockMarket, (StockMarket.id == Handler.key_for_gb[id - 1], True))
+        Handler.key_for_gb.pop(id - 1)
 
     @staticmethod
     def buy_minutes(username, id):
-        products = Handler.__take_usernames_money(username, Handler.key_for_min[id])
-        Handler.key_for_min.pop(id)
+        products = Handler.__take_usernames_money(username, Handler.key_for_min[id - 1])
+        if products is None:
+            return True
+        user = database.get_object(UserAccount, (UserAccount.get_username(UserAccount) == username, True))
+        user.set_minutes(user.get_minutes() + products.min)
         products.buy_min()
-        database.delete(StockMarket, (StockMarket.id == Handler.key_for_min[id], True))
+        database.delete(StockMarket, (StockMarket.id == Handler.key_for_min[id - 1], True))
+        Handler.key_for_min.pop(id - 1)
+
 
     @staticmethod
     def __take_usernames_money(username, id):
-        products = database.get_object(StockMarket, StockMarket.id == id)
+        products = database.get_object(StockMarket, (StockMarket.id == id, True))
         cost = products.cost
         user = database.get_object(UserAccount, (UserAccount.get_username(UserAccount) == username, True))
+        if (user.get_balance() < cost):
+            return
         user.set_balance(user.get_balance() - cost)
         return products
 
