@@ -5,6 +5,7 @@ from flask_jwt_extended import decode_token
 from src.schemas.schemas import AdminSchema, TariffSchema, AuthSchema
 from src.Authorization.Authorization import Authorization as Auth
 from src.Admin.HandleAdmin import HandleAdmin
+from src.Constants import AdminErrorMessages, AdminApprovalMessages
 
 adm = Blueprint('adm', __name__, url_prefix='/admin')
 
@@ -15,7 +16,7 @@ adm = Blueprint('adm', __name__, url_prefix='/admin')
 def admin_login(**kwargs):
     ans = Auth.admin_login(**kwargs)
     if ans is None:
-        return {"error": "User not found"}, 401
+        return {"error": AdminErrorMessages.NON_EXISTING_ADMIN}, 401
     token = HandleAdmin.get_token(ans)
     return {'access_token': token}
 
@@ -35,11 +36,11 @@ def protected():
 @use_kwargs(AdminSchema)
 def admin_register(**kwargs):
     if HandleAdmin.is_admin('username', kwargs['username']):
-        return {"error": "User not found"}, 411
+        return {"error": AdminErrorMessages.NON_EXISTING_ADMIN}, 411
     if HandleAdmin.is_admin('passport_id', kwargs['passport_id']):
-        return {"error": "User not found"}, 409
+        return {"error": AdminErrorMessages.NON_EXISTING_ADMIN}, 409
     if HandleAdmin.is_admin('phone_number', kwargs['phone_number']):
-        return {"error": "User not found"}, 410
+        return {"error": AdminErrorMessages.NON_EXISTING_ADMIN}, 410
     token = HandleAdmin.create_admin_account(**kwargs)
     return {'access_token': token}, 200
 
@@ -57,8 +58,8 @@ def get_list_of_tariff():
 def edit_tariffs(tariff_id, **kwargs):
     data = request.json
     if HandleAdmin.update_tariffs(tariff_id, **kwargs) is None:
-        return {'error': 'good'}, 403
-    return {'message': 'good'}
+        return {'error': AdminApprovalMessages.EDIT_TARIFF_SUCCESSFULLY}, 403
+    return {'message': AdminApprovalMessages.EDIT_TARIFF_SUCCESSFULLY}
 
 
 @adm.route('/list_tariff/<int:tariff_id>', methods=['GET'])
@@ -66,7 +67,7 @@ def edit_tariffs(tariff_id, **kwargs):
 def get_tariffs(tariff_id):
     tariff = HandleAdmin.get_tariff(tariff_id)
     if tariff is None:
-        return {"error": "No such Tariff"}, 405
+        return {"error": AdminErrorMessages.NON_EXISTING_TARIFF}, 405
     return tariff, 201
 
 
@@ -75,4 +76,4 @@ def get_tariffs(tariff_id):
 @use_kwargs(TariffSchema)
 def create_tariffs(**kwargs):
     HandleAdmin.create_new_tariff(**kwargs)
-    return {'message': 'Successfully'}, 200
+    return {'message': AdminApprovalMessages.CREATE_TARIFF_SUCCESSFULLY}, 200
