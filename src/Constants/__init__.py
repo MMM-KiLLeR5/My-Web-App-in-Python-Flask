@@ -42,3 +42,16 @@ class UserApprovalMessages:
     PAID_TARIFF_SUCCESSFULLY = "Success"
     GB_OFFERED_SUCCESSFULLY = "Success"
     MINUTE_OFFERED_SUCCESSFULLY = "Success"
+
+
+class StockMarketErrorMessages:
+    NOT_ENOUGH_MINUTE = "Not enough minute"
+    NOT_ENOUGH_GB = "Not enough gb"
+    NOT_ENOUGH_MONEY = "Not enough money"
+
+
+class StockMarketApprovalMessages:
+    MINUTE_OFFERED_SUCCESSFULLY = "Success"
+    GB_OFFERED_SUCCESSFULLY = "Success"
+    GB_BOUGHT_SUCCESSFULLY = "Success"
+    MINUTE_BOUGHT_SUCCESSFULLY = "Success"

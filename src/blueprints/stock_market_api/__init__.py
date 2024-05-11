@@ -2,6 +2,8 @@ from flask import Blueprint, request
 from flask_apispec import use_kwargs, marshal_with
 from src.schemas.schemas import StockMarketMin, StockMarketGB
 from src.Market.HandleStockMarket import Handler
+from src.Constants import StockMarketApprovalMessages, StockMarketErrorMessages
+
 
 stock_market_api = Blueprint('market', __name__, url_prefix='/market')
 
@@ -22,8 +24,8 @@ def create_offer_min(username, **kwargs):
     try:
         Handler.create_min_offer(username, **kwargs)
     except ValueError:
-        return {'error': 'Not enough minute'}, 405
-    return {'message': 'Success'}, 200
+        return {'error': StockMarketErrorMessages.NOT_ENOUGH_MINUTE}, 405
+    return {'message': StockMarketApprovalMessages.MINUTE_OFFERED_SUCCESSFULLY}, 200
 
 
 
@@ -33,21 +35,21 @@ def create_offer_gb(username, **kwargs):
     try:
         Handler.create_gb_offer(username, **kwargs)
     except ValueError:
-        return {'error': 'Not enough GB'}, 405
-    return {'message': 'Success'}, 200
+        return {'error': StockMarketErrorMessages.NOT_ENOUGH_GB}, 405
+    return {'message': StockMarketApprovalMessages.GB_OFFERED_SUCCESSFULLY}, 200
 
 
 @stock_market_api.route('/buy_gb/<string:username>&<int:id>', methods=['POST'])
 def buy_gb(username, id):
     if Handler.buy_gb(username, id):
-        return {'error': 'Not enough money'}, 405
-    return {'message': 'Success'}, 200
+        return {'error': StockMarketErrorMessages.NOT_ENOUGH_MONEY}, 405
+    return {'message': StockMarketApprovalMessages.GB_BOUGHT_SUCCESSFULLY}, 200
 
 
 
 @stock_market_api.route('/buy_min/<string:username>&<int:id>', methods=['POST'])
 def buy_min(username, id):
     if Handler.buy_minutes(username, id):
-        return {'error': 'Not enough money'}, 405
-    return {'message': 'Success'}, 200
+        return {'error': StockMarketErrorMessages.NOT_ENOUGH_MONEY}, 405
+    return {'message': StockMarketApprovalMessages.MINUTE_BOUGHT_SUCCESSFULLY}, 200
 
