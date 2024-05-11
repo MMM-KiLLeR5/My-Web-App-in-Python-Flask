@@ -9,15 +9,13 @@ async def add_contact_to_database(message, contact: types.Contact):
         connection = sqlite3.connect('contacts.db')
         cursor = connection.cursor()
 
-        cursor.execute('''CREATE TABLE IF NOT EXISTS contacts
-                              (user_id INTEGER PRIMARY KEY, phone_number TEXT)''')
+        cursor.execute(ContactMessage.CREATE_TABLE_QUERY)
 
-        cursor.execute('''INSERT INTO contacts (user_id, phone_number)
-                              VALUES (?, ?)''', (contact.user_id, contact.phone_number))
+        cursor.execute(ContactMessage.INSERT_CONTACT_QUERY, (contact.user_id, contact.phone_number))
 
         connection.commit()
     except sqlite3.IntegrityError:
-        await message.answer(f"Ой! я же тебя знаю, привет {message.from_user.first_name}!",
+        await message.answer(f"{ContactMessage.GREETING_MESSAGE} {message.from_user.first_name}!",
                              reply_markup=types.ReplyKeyboardRemove())
         is_ok = False
     finally:

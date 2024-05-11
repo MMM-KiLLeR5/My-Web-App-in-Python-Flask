@@ -25,6 +25,9 @@ class ContactMessage:
     CONTACT_RECEIVED_MESSAGE = "Спасибо, ваш контакт получен!"
     PLEASE_SEND_CONTACT_MESSAGE = ("Пожалуйста, отправьте ваш контакт,"
                                    " чтобы мы могли связаться с вами.")
+    GREETING_MESSAGE = "Ой! я же тебя знаю, привет "
+    INSERT_CONTACT_QUERY = '''INSERT INTO contacts (user_id, phone_number) VALUES (?, ?)'''
+    CREATE_TABLE_QUERY = '''CREATE TABLE IF NOT EXISTS contacts (user_id INTEGER PRIMARY KEY, phone_number TEXT)'''
 
 
 class InfoMessage:
