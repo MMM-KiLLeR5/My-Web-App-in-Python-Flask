@@ -13,9 +13,9 @@ TestCode:
     - pip install coverage
     - pip install -r src/requirements.txt
   script:
-    - PYTHONPATH=src python -m pytest --cov=src --cov-report=xml:coverage.xml tests
+    - PYTHONPATH=src python -m pytest --cov=src --cov-report=xml:coverage.xml --cov-report=html --cov-report=term --cov-report=annotate --cov-report=term-missing --cov-fail-under=95 tests
   artifacts:
     untracked: false
-    reports:
-      junit:
-          - tests/coverage.xml
+    paths:
+      - coverage.xml
+      - htmlcov/
