@@ -1,5 +1,5 @@
 import unittest
-from Tariffs import Tariff
+from Tariffs.Tariff import Tariff
 
 
 class TestTariff(unittest.TestCase):
