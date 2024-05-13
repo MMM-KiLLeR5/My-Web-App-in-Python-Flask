@@ -19,3 +19,6 @@ TestCode:
     paths:
       - coverage.xml
       - htmlcov/
+    reports:
+      junit:
+      - coverage.xml
