@@ -4,12 +4,13 @@ stages:
 default:
   tags:
     - common
+    - image ubuntu
 
 TestCode:
   stage: test
   before_script:
     - pip install pytest-cov
-    - pip install pytest
+    - pip install pytestUpdate .gitlab-ci.yml file
     - pip install coverage
     - pip install -r src/requirements.txt
     - touch example.db
