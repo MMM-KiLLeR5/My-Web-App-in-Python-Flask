@@ -1,8 +1,8 @@
-from src.User.UserAccount import UserAccount
-from src.Admin.AdminAccount import AdminAccount
-from src.Market.StockMarket import StockMarket
-from src.Tools.DataBase import database
-from src.Tools.MyHashFunc import HashFunction
+from User.UserAccount import UserAccount
+from Admin.AdminAccount import AdminAccount
+from Market.StockMarket import StockMarket
+from Tools.DataBase import database
+from Tools.MyHashFunc import HashFunction
 
 
 class Authorization:

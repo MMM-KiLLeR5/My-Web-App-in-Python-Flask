@@ -1,6 +1,6 @@
-from src.Market.StockMarket import StockMarket
-from src.User.UserAccount import UserAccount
-from src.Tools.DataBase import database
+from Market.StockMarket import StockMarket
+from User.UserAccount import UserAccount
+from Tools.DataBase import database
 
 
 class Handler:
