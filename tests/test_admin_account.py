@@ -16,6 +16,15 @@ class TestAdminAccount(unittest.TestCase):
     def test_get_phone_number(self):
         self.assertEqual(self.user.get_phone_number(), "987654321")
 
+    def test_get_base_data(self):
+        self.assertEqual(self.user.get_first_name(), "Barry")
+        self.assertEqual(self.user.get_last_name(), "Allen")
+        self.assertEqual(self.user.get_birth_data(), "1990-01-01")
+        self.assertEqual(self.user.get_sex(), "male")
+        self.assertEqual(self.user.get_passport_id(), "1234567890")
+
+
+
     def test_create_tariff(self):
         tariff = self.user.create_tariff(10, 100, 500, 5, 10)
         self.assertIsInstance(tariff, Tariff)
