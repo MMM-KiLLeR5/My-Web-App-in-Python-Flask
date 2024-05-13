@@ -17,8 +17,6 @@ ENV PATH="/venv/bin:$PATH"
 
 RUN . venv/bin/activate && pip install -r requirements.txt
 
-RUN chmod 777 contacts.db
-
 USER user
 
-CMD ["python3", "bot.py"]
+CMD ["python3", "app.py"]
