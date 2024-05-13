@@ -15,7 +15,7 @@ RUN chown user:user ./
 RUN python3 -m venv venv
 ENV PATH="/venv/bin:$PATH"
 
-RUN . venv/bin/activate && pip install --no-cache-dir -r requirements.txt
+RUN . venv/bin/activate && pip install -r requirements.txt
 
 RUN chmod 777 contacts.db
 
