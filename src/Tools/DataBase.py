@@ -39,20 +39,17 @@ class ControlDataBase:
             self.__session.delete(obj)
             self.__session.commit()
             return
-        print("THERE IS NO SUCH OBJECT IN THE DATABASE")  # TODO менять логику
 
     def get_object(self, model, expressions):
         if self.find(model, expressions):
             obj = self.__session.query(model).filter(and_(*expressions)).all()[0]
             return obj
-        print("THERE IS NO SUCH OBJECT IN THE DATABASE")  # TODO менять логику
         return None
 
     def commit(self):
         self.__session.commit()
 
 
-# DATABASE_URL = 'postgresql://postgres:123@192.168.0.105:5432/test'
 db_url = Config.DATABASE_URL
 database = ControlDataBase(db_url)
 database.create_tables()

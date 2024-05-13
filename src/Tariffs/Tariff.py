@@ -6,7 +6,7 @@ class Tariff(Base):
     id = Column(Integer, primary_key=True)
 
     def __init__(self, cost_one_gb: int, cost_one_minute: int,
-                 price: int, gb: int = 0, minute: int = 0, ) -> None:
+                 price: int, gb: int = 0, minute: int = 0) -> None:
         self.cost_one_gb = cost_one_gb
         self.cost_one_minute = cost_one_minute
         self.gb = gb
