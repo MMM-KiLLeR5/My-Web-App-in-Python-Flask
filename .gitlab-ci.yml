@@ -9,7 +9,7 @@ TestCode:
   stage: test
   before_script:
     - pip install pytest-cov
-    - pip install pytestUpdate .gitlab-ci.yml file
+    - pip install pytest
     - pip install coverage
     - pip install -r src/requirements.txt
     - touch example.db
