@@ -22,3 +22,4 @@ TestCode:
     reports:
       junit:
       - coverage.xml
+      - htmlcov/
