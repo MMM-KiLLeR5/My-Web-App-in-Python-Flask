@@ -11,14 +11,12 @@ TestCode:
     - pip install pytest-cov
     - pip install pytest
     - pip install coverage
+    - pip install pytest-junitxml
     - pip install -r src/requirements.txt
   script:
-    - PYTHONPATH=src python -m pytest --cov=src --cov-report=xml:coverage.xml --cov-report=html --cov-report=term --cov-report=annotate --cov-report=term-missing
+    - PYTHONPATH=src python -m pytest --cov --junitxml=test_results.xml src tests
   artifacts:
-    untracked: false
-    paths:
-      - coverage.xml
-      - htmlcov/
+    untracked: false 
     reports:
       junit:
-      - coverage.xml
+      - test_results.xml
