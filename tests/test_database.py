@@ -7,7 +7,7 @@ from Tools.DataBase import ControlDataBase
 
 class TestDatabase(unittest.TestCase):
     def setUp(self):
-        self.database = ControlDataBase('sqlite:///example.db')
+        self.database = ControlDataBase('sqlite:///:memory:')
         self.database.create_tables()
         self.database.creat_session()
         self.tariff = Tariff(1, 1, 1, 1, 1)
