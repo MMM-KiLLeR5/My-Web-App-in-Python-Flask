@@ -1,0 +1,21 @@
+stages:
+  - test
+
+default:
+  tags:
+    - common
+
+TestCode:
+  stage: test
+  before_script:
+    - pip install pytest-cov
+    - pip install pytest
+    - pip install coverage
+    - pip install -r src/requirements.txt
+  script:
+    - PYTHONPATH=src python -m pytest --cov=src --cov-report=xml tests
+  artifacts:
+    untracked: false
+    reports:
+      junit:
+          - coverage.xml
