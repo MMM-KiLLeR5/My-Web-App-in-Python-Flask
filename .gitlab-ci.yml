@@ -13,7 +13,7 @@ TestCode:
     - pip install coverage
     - pip install -r src/requirements.txt
   script:
-    - PYTHONPATH=src python -m pytest --cov --junitxml=test_results.xml src tests
+    - PYTHONPATH=src python -m pytest --junitxml=test_results.xml --cov src tests
   artifacts:
     untracked: false 
     reports:
