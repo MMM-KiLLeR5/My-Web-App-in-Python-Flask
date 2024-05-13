@@ -4,7 +4,6 @@ stages:
 default:
   tags:
     - common
-    - image ubuntu
 
 TestCode:
   stage: test
@@ -14,6 +13,7 @@ TestCode:
     - pip install coverage
     - pip install -r src/requirements.txt
     - touch example.db
+    - ls
   script:
     - PYTHONPATH=src python -m pytest --junitxml=test_results.xml --cov src tests
   artifacts:
