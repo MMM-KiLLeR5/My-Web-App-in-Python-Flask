@@ -18,4 +18,4 @@ TestCode:
     untracked: false
     reports:
       junit:
-          - coverage.xml
+          - report.xml
