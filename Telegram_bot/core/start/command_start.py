@@ -1,7 +1,7 @@
 import asyncio
 from ..keyboard.reply import reply_keyboard
 from ..utils.commands import set_commands
-from tp_project_vrm24_252.Telegram_bot.massage_config.messages import StartMessage
+from massage_config.messages import StartMessage
 
 
 async def get_start(message, bot, state):

@@ -2,7 +2,7 @@ import sqlite3
 import aiohttp
 import os
 from dotenv import load_dotenv
-from tp_project_vrm24_252.Telegram_bot.massage_config.messages import InfoMessage
+from massage_config.messages import InfoMessage
 
 load_dotenv()
 
