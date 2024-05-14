@@ -29,6 +29,7 @@ class TestDatabase(unittest.TestCase):
         assert self.database.delete(AdminAccount, (AdminAccount.get_username(AdminAccount) == '2', True)) is None
 
     def test_delete_2(self):
+        self.database.insert(self.admin)
         assert self.database.delete(AdminAccount, (AdminAccount.get_username(AdminAccount) == '1', True)) is None
 
     def test_commit(self):
@@ -45,5 +46,6 @@ class TestDatabase(unittest.TestCase):
 
     def test_get(self):
         assert self.database.get_object(Tariff, (Tariff.gb == 2, True)) is None
+
 
 
