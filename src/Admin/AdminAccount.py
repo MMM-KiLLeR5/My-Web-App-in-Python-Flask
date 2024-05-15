@@ -1,6 +1,6 @@
-from src.BaseUser.BaseUser import BaseUser, Column, String, Integer
-from src.Tariffs.Tariff import Tariff
-from src.Tools.MyHashFunc import HashFunction
+from BaseUser.BaseUser import BaseUser, Column, String, Integer
+from Tariffs.Tariff import Tariff
+from Tools.MyHashFunc import HashFunction
 class AdminAccount(BaseUser):
     id = Column(Integer, primary_key=True)
 

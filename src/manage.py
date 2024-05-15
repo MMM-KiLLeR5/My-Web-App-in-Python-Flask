@@ -1,12 +1,12 @@
-from blueprints.admin_api import adm
+from blueprints.admin_api.api import adm
 
-from blueprints.stock_market_api import stock_market_api
+from blueprints.stock_market_api.api import stock_market_api
 
-from blueprints.user_api import user
+from blueprints.user_api.api import user
 
 from App import app, docs
-from src.Tools.DocsRegister import docs_register
-from src.Constants import Config
+from Tools.DocsRegister import docs_register
+from Constants.Constant import Config
 
 docs_register(app, docs, adm, '/api')
 docs_register(app, docs, user, '/user')

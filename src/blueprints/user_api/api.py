@@ -1,10 +1,10 @@
 from flask import Blueprint, request
 from flask_apispec import use_kwargs, marshal_with
 from flask_jwt_extended import decode_token
-from src.schemas.schemas import UserSchema, AuthSchema, ShareSchema, DataSchema
-from src.Authorization.Authorization import Authorization as Auth
-from src.User.HandleUser import HandleUser
-from src.Constants import UserErrorMessages, UserApprovalMessages
+from schemas.schemas import UserSchema, AuthSchema, ShareSchema, DataSchema
+from Authorization.Authorization import Authorization as Auth
+from User.HandleUser import HandleUser
+from Constants.Constant import UserErrorMessages, UserApprovalMessages
 
 user = Blueprint('user', __name__, url_prefix='/user_api')
 

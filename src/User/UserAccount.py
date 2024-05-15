@@ -1,9 +1,9 @@
 from sqlalchemy import ForeignKey
 
-from src.BaseUser.BaseUser import BaseUser, Column, String, Integer
+from BaseUser.BaseUser import BaseUser, Column, String, Integer
 from sqlalchemy.orm import relationship
-from src.Tariffs.Tariff import Tariff
-from src.Tools.MyHashFunc import HashFunction
+from Tariffs.Tariff import Tariff
+from Tools.MyHashFunc import HashFunction
 
 
 class UserAccount(BaseUser):

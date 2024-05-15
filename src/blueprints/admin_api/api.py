@@ -1,10 +1,10 @@
 from flask import Blueprint, request
 from flask_apispec import use_kwargs, marshal_with
 from flask_jwt_extended import decode_token
-from src.schemas.schemas import AdminSchema, TariffSchema, AuthSchema
-from src.Authorization.Authorization import Authorization as Auth
-from src.Admin.HandleAdmin import HandleAdmin
-from src.Constants import AdminErrorMessages, AdminApprovalMessages
+from schemas.schemas import AdminSchema, TariffSchema, AuthSchema
+from Authorization.Authorization import Authorization as Auth
+from Admin.HandleAdmin import HandleAdmin
+from Constants.Constant import AdminErrorMessages, AdminApprovalMessages
 
 adm = Blueprint('adm', __name__, url_prefix='/admin')
 

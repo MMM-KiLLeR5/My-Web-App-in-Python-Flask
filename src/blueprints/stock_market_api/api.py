@@ -1,8 +1,8 @@
 from flask import Blueprint, request
 from flask_apispec import use_kwargs, marshal_with
-from src.schemas.schemas import StockMarketMin, StockMarketGB
-from src.Market.HandleStockMarket import Handler
-from src.Constants import StockMarketApprovalMessages, StockMarketErrorMessages
+from schemas.schemas import StockMarketMin, StockMarketGB
+from Market.HandleStockMarket import Handler
+from Constants.Constant import StockMarketApprovalMessages, StockMarketErrorMessages
 
 
 stock_market_api = Blueprint('market', __name__, url_prefix='/market')
