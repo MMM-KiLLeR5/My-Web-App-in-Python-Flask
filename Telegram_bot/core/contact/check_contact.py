@@ -1,6 +1,6 @@
 import sqlite3
 from aiogram import types
-from tp_project_vrm24_252.Telegram_bot.massage_config.messages import ContactMessage
+from massage_config.messages import ContactMessage
 
 
 async def add_contact_to_database(message, contact: types.Contact):

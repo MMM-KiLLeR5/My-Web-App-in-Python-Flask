@@ -1,5 +1,5 @@
 from aiogram.types import ReplyKeyboardRemove
-from tp_project_vrm24_252.Telegram_bot.massage_config.messages import HelpMessage
+from massage_config.messages import HelpMessage
 
 
 async def get_help(message, state):

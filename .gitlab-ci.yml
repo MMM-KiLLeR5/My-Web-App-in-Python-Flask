@@ -1,0 +1,22 @@
+stages:
+  - test
+
+default:
+  tags:
+    - common
+
+TestCode:
+  stage: test
+  before_script:
+    - pip install pytest-cov
+    - pip install pytest
+    - pip install coverage
+    - pip install -r src/requirements.txt
+    - export DATABASE_URL=sqlite:///example.db
+  script:
+    - PYTHONPATH=src python -m pytest --junitxml=test_results.xml --cov src tests
+  artifacts:
+    untracked: false 
+    reports:
+      junit:
+      - test_results.xml
