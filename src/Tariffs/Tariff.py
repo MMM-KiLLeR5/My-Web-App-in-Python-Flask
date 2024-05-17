@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer
-from src.BaseUser.BaseUser import Base
+from BaseUser.BaseUser import Base
 
 
 class Tariff(Base):

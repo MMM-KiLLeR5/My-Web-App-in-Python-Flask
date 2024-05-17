@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from src.Admin.AdminAccount import AdminAccount, Tariff
-from src.Authorization.Authorization import database
+from Admin.AdminAccount import AdminAccount, Tariff
+from Tools.DataBase import database
 from flask_jwt_extended import create_access_token
 from datetime import timedelta
-from src.Tools.MyHashFunc import sha256
+from Tools.MyHashFunc import sha256
 
 
 class HandleAdmin(AdminAccount):

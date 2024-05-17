@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine, and_
-from src.BaseUser.BaseUser import Base
-from sqlalchemy.orm import sessionmaker
-from src.Constants import Config
+from BaseUser.BaseUser import Base
+from sqlalchemy.orm import sessionmaker, defer
+from Constants.Constant import Config
 
 
 class ControlDataBase:
@@ -22,6 +22,10 @@ class ControlDataBase:
     def query(self, model):
         return self.__session.query(model)
 
+    def query_with_options(self, model, expressions, column_to_exclude):
+        return self.__session.query(model).options(defer(column_to_exclude)).filter(
+            expressions).all()
+
     def find(self, model, expressions):
         return len(self.__session.query(model).filter(and_(*expressions)).all()) != 0
 
@@ -35,13 +39,13 @@ class ControlDataBase:
             self.__session.delete(obj)
             self.__session.commit()
             return
-        print("THERE IS NO SUCH OBJECT IN THE DATABASE")  #TODO менять логику
+        print("THERE IS NO SUCH OBJECT IN THE DATABASE")  # TODO менять логику
 
     def get_object(self, model, expressions):
         if self.find(model, expressions):
             obj = self.__session.query(model).filter(and_(*expressions)).all()[0]
             return obj
-        print("THERE IS NO SUCH OBJECT IN THE DATABASE") #TODO менять логику
+        print("THERE IS NO SUCH OBJECT IN THE DATABASE")  # TODO менять логику
         return None
 
     def commit(self):
