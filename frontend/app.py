@@ -14,6 +14,7 @@ def sha256_str(item):
 # Код доступа
 ACCESS_CODE = os.environ.get("SECRET_KEY")
 
+URL = os.environ.get("URL_SERVER")
 
 def extract_jwt_from_query_param():
     jwt_token = request.args.get('jwt')
@@ -29,7 +30,7 @@ def jwt_required_from_query_param_admins(fn):
         if not token:
             return jsonify({"msg": "Missing JWT in query parameter"}), 401
         try:
-            response = requests.post('http://93.175.7.10:5000/api/check_token', json={'token': token})
+            response = requests.post('URL/api/check_token', json={'token': token})
             if response.status_code != 200:
                 return jsonify({"msg": "Invalid token"}), 401
             data = response.json()
@@ -52,7 +53,7 @@ def jwt_required_from_query_param_users(fn):
         if not token:
             return jsonify({"msg": "Missing JWT in query parameter"}), 401
         try:
-            response = requests.post('http://93.175.7.10:5000/api/check_token', json={'token': token})
+            response = requests.post('URL/api/check_token', json={'token': token})
             if response.status_code != 200:
                 return jsonify({"msg": "Invalid token"}), 401
             data = response.json()

@@ -1,7 +1,8 @@
 from sqlalchemy import create_engine, and_
 from BaseUser.BaseUser import Base
 from sqlalchemy.orm import sessionmaker, defer
-from Constants import Config
+
+from Constants.Constant import Config
 
 
 class ControlDataBase:
