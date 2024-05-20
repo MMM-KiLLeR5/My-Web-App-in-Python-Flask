@@ -6,6 +6,7 @@ from blueprints.user_api.api import user
 
 from App import app, docs
 from Tools.DocsRegister import docs_register
+
 from Constants.Constant import Config
 
 docs_register(app, docs, adm, '/api')

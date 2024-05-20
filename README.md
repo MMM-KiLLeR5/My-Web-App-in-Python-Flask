@@ -14,23 +14,43 @@
 ![](UML-diagram-latest.png)
 
 ## Запуск проект
-### Необходимая версия питона 
-#### version - 3.12
-### Создание виртуального окружение
-    pip install virtualenv
-    
-    virtualenv myenv
-    
-    source myenv/bin/activate
-     
-    pip install -r requirements.txt
-
-### Запуск
+### У вас должен быть установлен докер!!!
+### Запуск сервера для backend 
+#### Перед запуском
     cd src
-    python manage.py # запуск бэкэнд сервера
-    cd ..
+    docker build -t tele3_server .
+    touch .env(внутри неё, сооздадите переменные окружение DATABASE_URL - ссылка на базу данных, KNOWN_HOST - какой IP вы слушаете, PORT - на каком порту вы запускаетесь)
+#### Запуск. У нас есть два способа запуска.
+    docker run -e DATABASE_URL=[ссылка на базу данных] KNOWN_HOST=[какой IP вы слушаете] PORT=[port] -p port:port --name tele3_server_back tele3_server
+    docker run --env-file=.env -p port:port --name tele3_server_back tele3_server 
+    
+### Запуска сервер для frontend
+#### Перед запуском
     cd frontend
-    python app.py
+    docker build -t tele3_server_front .
+    touch .env(внутри неё, сооздадите переменные окружение SECRET_KEY - хэш секретного ключа, чтобы получить доступ как администратор)
+#### Тоже два спопоба запуска
+    docker run --env-file=.env -p port:port --name tele3_server_frontend tele3_server_front
+    docker run -e SECRET_KEY=[хэш для секретного ключа] -p port:port --name tele3_server_frontend tele3_server_front
+
+
+
+### Запуска сервер для телеграмм-бота
+#### Перед запуском
+    cd Telegram_bot
+    docker build -t telegram_bot .
+    touch .env(внутри неё, сооздадите переменные окружение TOKEN_API - токен бота, ADMINS_CHAT_ID - ID чата службы поддержки, URL_USERS_PHONE_NUMBER - api)
+#### Тоже два спопоба запуска
+    docker run --env-file=.env --name telegram_bot_service telegram_bot
+    docker run -e TOKEN_API=[токен бота] ADMINS_CHAT_ID=[ID чата службы поддержки] URL_USERS_PHONE_NUMBER=[api]
+
+
+
+
+
+
+
+
     
 
 ### Код доступа для админов
